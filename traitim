@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lá thư bất ngờ</title>
+<style>
+  /* Đặt kiểu dáng và kích thước cho toàn bộ trang */
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f8ff;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Hộp thư */
+  .envelope {
+    position: relative;
+    width: 200px;
+    height: 140px;
+    background-color: #ff6b81;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+  }
+
+  /* Phần mở thư */
+  .envelope.opened {
+    background-color: #ffffff;
+    color: #ff6b81;
+  }
+
+  /* Dòng chữ "Nhấn để mở" */
+  .open-text {
+    display: block;
+  }
+
+  /* Khi thư mở, ẩn dòng "Nhấn để mở" */
+  .envelope.opened .open-text {
+    display: none;
+  }
+
+  /* Nội dung thư */
+  .message {
+    display: none;
+    font-size: 18px;
+    color: #ff6b81;
+    padding: 10px;
+    line-height: 1.5;
+  }
+
+  /* Hiển thị nội dung khi thư mở */
+  .envelope.opened .message {
+    display: block;
+  }
+
+  /* Trái tim bay */
+  .heart {
+    position: absolute;
+    color: #ff6b81;
+    font-size: 18px;
+    animation: fly 3s linear infinite;
+  }
+
+  /* Hiệu ứng bay cho trái tim */
+  @keyframes fly {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translate(-20px, -50px) scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(30px, -100px) scale(0.8);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Lá thư -->
+<div class="envelope" onclick="openLetter()">
+  <span class="open-text">Nhấn để mở thư</span>
+  <div class="message">"Gửi đến người đặc biệt với tất cả yêu thương và những điều tuyệt vời nhất!"</div>
+</div>
+
+<!-- Trái tim bay -->
+<script>
+  function openLetter() {
+    const envelope = document.querySelector('.envelope');
+    
+    // Mở thư và hiển thị nội dung
+    envelope.classList.add('opened');
+    
+    // Tạo hiệu ứng trái tim bay
+    setInterval(createHeart, 300);
+  }
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerText = '❤️';
+    
+    // Đặt vị trí trái tim ngẫu nhiên và thêm vào trang
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+    document.body.appendChild(heart);
+    
+    // Xóa trái tim sau khi hoàn thành bay
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>
